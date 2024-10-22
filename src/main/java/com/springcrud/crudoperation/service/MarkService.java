@@ -1,6 +1,6 @@
-package com.Spring_Crud.CrudOperation.Service;
+package com.springcrud.crudoperation.service;
 
-import com.Spring_Crud.CrudOperation.Dto.StudentMarkDto;
+import com.springcrud.crudoperation.dto.StudentMarkDto;
 
 public interface MarkService {
     void addStudentMarkById(StudentMarkDto studentMarkDto);

@@ -1,6 +1,6 @@
-package com.Spring_Crud.CrudOperation.Dto;
+package com.springcrud.crudoperation.dto;
 
-import com.Spring_Crud.CrudOperation.Model.StudentMark;
+import com.springcrud.crudoperation.model.StudentMark;
 import lombok.Data;
 
 import java.util.List;

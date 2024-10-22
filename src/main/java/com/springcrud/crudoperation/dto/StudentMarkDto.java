@@ -1,4 +1,4 @@
-package com.Spring_Crud.CrudOperation.Dto;
+package com.springcrud.crudoperation.dto;
 
 import lombok.Data;
 

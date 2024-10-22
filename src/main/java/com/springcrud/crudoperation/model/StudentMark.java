@@ -1,4 +1,4 @@
-package com.Spring_Crud.CrudOperation.Model;
+package com.springcrud.crudoperation.model;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;

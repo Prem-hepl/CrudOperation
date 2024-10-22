@@ -1,6 +1,6 @@
-package com.Spring_Crud.CrudOperation.Service;
+package com.springcrud.crudoperation.service;
 
-import com.Spring_Crud.CrudOperation.Dto.StudentDto;
+import com.springcrud.crudoperation.dto.StudentDto;
 import org.springframework.stereotype.Service;
 
 @Service

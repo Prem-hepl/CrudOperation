@@ -1,9 +1,9 @@
-package com.Spring_Crud.CrudOperation.Service.ServiceImpl;
+package com.springcrud.crudoperation.service.serviceimpl;
 
-import com.Spring_Crud.CrudOperation.Dto.StudentMarkDto;
-import com.Spring_Crud.CrudOperation.Model.StudentMark;
-import com.Spring_Crud.CrudOperation.Repository.MarkRepo;
-import com.Spring_Crud.CrudOperation.Service.MarkService;
+import com.springcrud.crudoperation.dto.StudentMarkDto;
+import com.springcrud.crudoperation.model.StudentMark;
+import com.springcrud.crudoperation.repository.MarkRepo;
+import com.springcrud.crudoperation.service.MarkService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

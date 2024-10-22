@@ -1,11 +1,9 @@
-package com.Spring_Crud.CrudOperation.Service.ServiceImpl;
+package com.springcrud.crudoperation.service.serviceimpl;
 
-import com.Spring_Crud.CrudOperation.Repository.MarkRepo;
+import com.springcrud.crudoperation.repository.MarkRepo;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class MarkServiceImplTest {
 

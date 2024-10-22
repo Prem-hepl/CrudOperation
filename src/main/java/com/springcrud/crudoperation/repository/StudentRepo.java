@@ -1,6 +1,6 @@
-package com.Spring_Crud.CrudOperation.Repository;
+package com.springcrud.crudoperation.repository;
 
-import com.Spring_Crud.CrudOperation.Model.Student;
+import com.springcrud.crudoperation.model.Student;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 public interface StudentRepo extends MongoRepository<Student,String> {

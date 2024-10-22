@@ -1,7 +1,7 @@
-package com.Spring_Crud.CrudOperation.Controller;
+package com.springcrud.crudoperation.controller;
 
-import com.Spring_Crud.CrudOperation.Dto.StudentMarkDto;
-import com.Spring_Crud.CrudOperation.Service.MarkService;
+import com.springcrud.crudoperation.dto.StudentMarkDto;
+import com.springcrud.crudoperation.service.MarkService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
