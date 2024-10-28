@@ -19,8 +19,7 @@ import org.springframework.web.bind.annotation.*;
     public StudentDto getStudent(@RequestParam String id){
         return studentService.getStudentById(id);
     }
-
-    @PutMapping("/updateStudent")
+    @PostMapping("/updateStudent")
     public String updateStudentById(@RequestBody StudentDto studentDto){
         return studentService.updateStudentById(studentDto);
     }

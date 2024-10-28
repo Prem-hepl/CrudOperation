@@ -16,10 +16,11 @@ import org.springframework.web.bind.annotation.*;
         markService.addStudentMarkById(studentMarkDto);
         return "Mark added....";
     }
-    @PutMapping("/updateMark")
+    @PostMapping("/updateMark")
     public String updateMark(@RequestParam String id,@RequestBody StudentMarkDto markDto){
         return markService.updateMarkById(id,markDto);
     }
+    @GetMapping("/markById")
     public StudentMarkDto getMarkById(@RequestParam String id){
         return markService.getMarkById(id);
 
