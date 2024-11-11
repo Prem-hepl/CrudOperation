@@ -9,12 +9,14 @@ import com.springcrud.crudoperation.repository.MilestoneRepository;
 import com.springcrud.crudoperation.repository.TaskRepository;
 import com.springcrud.crudoperation.repository.UserRepository;
 import com.springcrud.crudoperation.response.SuccessResponse;
+import com.springcrud.crudoperation.response.TaskResponse;
 import com.springcrud.crudoperation.response.UserResponseDto;
 import com.springcrud.crudoperation.service.TaskService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -66,6 +68,46 @@ public class TaskServiceImpl implements TaskService {
 
         response.setStatusCode(200);
         response.setStatusMesssage("Task Created Successfully");
+        return response;
+    }
+
+    @Override
+    public SuccessResponse<Object> getAllByProjectId(String projectId) {
+        SuccessResponse<Object>response = new SuccessResponse<>();
+
+        List<Task>taskList=taskRepository.findByProjectId(projectId);
+        List<TaskResponse>taskResponseList=taskList.stream()
+                .map(task -> {
+                    TaskResponse taskResponse=new TaskResponse();
+                    taskResponse.setId(task.getId());
+                    taskResponse.setName(task.getName());
+                    taskResponse.setDescription(task.getDescription());
+                    taskResponse.setCreatedAt(String.valueOf(task.getCreatedAt()));
+                    taskResponse.setUpdatedAt(String.valueOf(task.getUpdatedAt()));
+                    taskResponse.setCreatedBy(task.getCreatedBy());
+                    taskResponse.setUpdatedBy(task.getUpdatedBy());
+                    taskResponse.setMilestoneId(String.valueOf(task.getMilestone()));
+                    taskResponse.setActive(task.isActive());
+                    taskResponse.setDeleteFlag(!task.isActive());
+                    return taskResponse;
+                }).toList();
+//        List<TaskResponse>taskResponseList=new ArrayList<>();
+//        for (Task task : taskList){
+//            TaskResponse taskResponse=new TaskResponse();
+//            taskResponse.setId(task.getId());
+//            taskResponse.setName(task.getName());
+//            taskResponse.setDescription(task.getDescription());
+//            taskResponse.setCreatedAt(String.valueOf(task.getCreatedAt()));
+//            taskResponse.setUpdatedAt(String.valueOf(task.getUpdatedAt()));
+//            taskResponse.setCreatedBy(task.getCreatedBy());
+//            taskResponse.setUpdatedBy(task.getUpdatedBy());
+//            taskResponse.setMilestoneId(String.valueOf(task.getMilestone()));
+//            taskResponse.setActive(task.isActive());
+//            taskResponse.setDeleteFlag(!task.isActive());
+//            taskResponseList.add(taskResponse);
+//        }
+        response.setCount(taskResponseList.size());
+        response.setData(taskResponseList);
         return response;
     }
 }

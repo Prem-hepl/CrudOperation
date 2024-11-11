@@ -9,4 +9,5 @@ public class SuccessResponse<T> {
     private Integer statusCode = 200;
     private String statusMesssage = "Success";
     private T data;
+    private int count;
 }

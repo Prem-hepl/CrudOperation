@@ -5,4 +5,6 @@ import com.springcrud.crudoperation.response.SuccessResponse;
 
 public interface TaskService {
     SuccessResponse<Object> createTask(TaskDto taskDto);
+
+    SuccessResponse<Object> getAllByProjectId(String projectId);
 }
