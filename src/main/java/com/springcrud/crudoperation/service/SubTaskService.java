@@ -5,4 +5,6 @@ import com.springcrud.crudoperation.response.SuccessResponse;
 
 public interface SubTaskService {
     SuccessResponse<Object> createSubTask(SubTaskDto subTaskDto);
+
+    SuccessResponse<Object> getAllSubTasks();
 }

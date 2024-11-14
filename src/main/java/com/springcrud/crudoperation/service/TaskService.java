@@ -7,4 +7,6 @@ public interface TaskService {
     SuccessResponse<Object> createTask(TaskDto taskDto);
 
     SuccessResponse<Object> getAllByProjectId(String projectId);
+
+    SuccessResponse<Object> getAllTasks();
 }

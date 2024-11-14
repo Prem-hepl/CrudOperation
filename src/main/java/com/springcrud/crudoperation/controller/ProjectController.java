@@ -16,4 +16,16 @@ public class ProjectController {
     public SuccessResponse<Object> addProject (@RequestBody ProjectDto projectDto){
         return projectService.createProject(projectDto);
     }
+    @PostMapping("/updateProject")
+    public SuccessResponse<Object>updateProject(@RequestBody ProjectDto projectDto){
+        return projectService.updateProject(projectDto);
+    }
+    @GetMapping("/getProjectById")
+    public SuccessResponse<Object> getProjectById(@RequestParam String id){
+        return projectService.getProjectById(id);
+    }
+    @GetMapping("/getAllProjects")
+    public SuccessResponse<Object> getAllProjects(){
+        return projectService.getAllProjects();
+    }
 }
