@@ -61,8 +61,8 @@ public class UserServiceImpl implements UserService {
         User user = new User();
         try {
             if (Objects.nonNull(userDto.getId())) {
-                user = userRepository.findById(userDto.getId())
-                        .orElseThrow(() -> new RuntimeException("User not Found"));
+                user = userRepository.findById(userDto.getId()).orElseThrow
+                        (() -> new RuntimeException("User not Found"));
             }
             BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
             user.setName(userDto.getName());
@@ -74,12 +74,13 @@ public class UserServiceImpl implements UserService {
             user.setActive(userDto.isActive());
             user.setDeleteFlag(!userDto.isActive());
             userRepository.save(user);
-            response.setStatusCode(200);
-            response.setStatusMesssage("User Updated Successfully....");
-            return response;
+
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+        response.setStatusCode(200);
+        response.setStatusMesssage("User Updated Successfully....");
+        return response;
     }
 
     @Override

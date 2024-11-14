@@ -16,6 +16,10 @@ public class TaskController {
     public SuccessResponse<Object> createTask(@RequestBody TaskDto taskDto){
         return taskService.createTask(taskDto);
     }
+    @GetMapping("/getAllTasks")
+    public SuccessResponse<Object> getAllTasks(){
+        return taskService.getAllTasks();
+    }
     @GetMapping("/getAllByProjectId")
     public SuccessResponse<Object> getAllByProjectId(@RequestParam String projectId){
         return taskService.getAllByProjectId(projectId);

@@ -6,7 +6,7 @@ import java.util.List;
 
 
 @Data
-public class TaskResponse {
+public class ProjectResponse {
     private String id;
     private String name;
     private String description;
@@ -16,6 +16,5 @@ public class TaskResponse {
     private UserResponseDto updatedBy;
     private boolean isActive;
     private boolean deleteFlag;
-    private String milestoneId;
-    private List<String> subTask;
+    private List<String> milestone;
 }

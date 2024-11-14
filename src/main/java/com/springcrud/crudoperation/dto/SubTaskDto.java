@@ -16,5 +16,5 @@ public class SubTaskDto {
     private String updatedBy;
     private boolean isActive;
     private boolean deleteFlag;
-    private String TaskId;
+    private String taskId;
 }

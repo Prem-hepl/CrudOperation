@@ -10,4 +10,10 @@ import java.util.List;
 public interface ProjectService {
 
     SuccessResponse<Object> createProject(ProjectDto projectDto);
+
+    SuccessResponse<Object> getAllProjects();
+
+    SuccessResponse<Object> updateProject(ProjectDto projectDto);
+
+    SuccessResponse<Object> getProjectById(String id);
 }

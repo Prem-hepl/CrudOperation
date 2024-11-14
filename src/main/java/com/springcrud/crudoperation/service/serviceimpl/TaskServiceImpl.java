@@ -91,21 +91,36 @@ public class TaskServiceImpl implements TaskService {
                     taskResponse.setDeleteFlag(!task.isActive());
                     return taskResponse;
                 }).toList();
-//        List<TaskResponse>taskResponseList=new ArrayList<>();
-//        for (Task task : taskList){
-//            TaskResponse taskResponse=new TaskResponse();
-//            taskResponse.setId(task.getId());
-//            taskResponse.setName(task.getName());
-//            taskResponse.setDescription(task.getDescription());
-//            taskResponse.setCreatedAt(String.valueOf(task.getCreatedAt()));
-//            taskResponse.setUpdatedAt(String.valueOf(task.getUpdatedAt()));
-//            taskResponse.setCreatedBy(task.getCreatedBy());
-//            taskResponse.setUpdatedBy(task.getUpdatedBy());
-//            taskResponse.setMilestoneId(String.valueOf(task.getMilestone()));
-//            taskResponse.setActive(task.isActive());
-//            taskResponse.setDeleteFlag(!task.isActive());
-//            taskResponseList.add(taskResponse);
-//        }
+        response.setCount(taskResponseList.size());
+        response.setData(taskResponseList);
+        return response;
+    }
+
+    @Override
+    public SuccessResponse<Object> getAllTasks() {
+        SuccessResponse<Object>response=new SuccessResponse<>();
+        List<TaskResponse>taskResponseList=new ArrayList<>();
+        try {
+            List<Task>tasks=taskRepository.findAll();
+            taskResponseList=tasks.stream()
+                    .map(task -> {
+                        TaskResponse taskResponse=new TaskResponse();
+                        taskResponse.setId(task.getId());
+                        taskResponse.setName(task.getName());
+                        taskResponse.setDescription(task.getDescription());
+                        taskResponse.setCreatedAt(String.valueOf(task.getCreatedAt()));
+                        taskResponse.setUpdatedAt(String.valueOf(task.getUpdatedAt()));
+                        taskResponse.setCreatedBy(task.getCreatedBy());
+                        taskResponse.setUpdatedBy(task.getUpdatedBy());
+                        taskResponse.setActive(task.isActive());
+                        taskResponse.setDeleteFlag(!task.isActive());
+                        taskResponse.setMilestoneId(task.getMilestone().getId());
+                        return taskResponse;
+                    }).toList();
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
         response.setCount(taskResponseList.size());
         response.setData(taskResponseList);
         return response;
