@@ -13,7 +13,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @PostMapping("/addUser")
+    @PostMapping("/createUser")
     public SuccessResponse<Object> addUser(@RequestBody UserDto userDto) throws Exception {
         return  userService.createUser(userDto);
     }

@@ -1,12 +1,13 @@
-package com.springcrud.crudoperation.response;
+package com.springcrud.crudoperation.dto;
 
+import com.springcrud.crudoperation.response.UserResponseDto;
 import lombok.Data;
 
 import java.util.List;
 
 
 @Data
-public class TaskResponse {
+public class MilestoneResponse {
     private String id;
     private String name;
     private String description;
@@ -16,6 +17,7 @@ public class TaskResponse {
     private UserResponseDto updatedBy;
     private boolean isActive;
     private boolean deleteFlag;
-    private String milestoneId;
-    private List<String> subTask;
+    private String projectId;
+    private List<String> task;
+
 }

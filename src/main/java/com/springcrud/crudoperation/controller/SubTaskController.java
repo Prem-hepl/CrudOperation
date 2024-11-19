@@ -4,10 +4,7 @@ import com.springcrud.crudoperation.dto.SubTaskDto;
 import com.springcrud.crudoperation.response.SuccessResponse;
 import com.springcrud.crudoperation.service.SubTaskService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class SubTaskController {
@@ -18,8 +15,16 @@ public class SubTaskController {
     public SuccessResponse<Object> createSubTask(@RequestBody SubTaskDto subTaskDto){
         return subTaskService.createSubTask(subTaskDto);
     }
-    @GetMapping("/getALlSubTasks")
+    @GetMapping("/getAllSubTasks")
     public SuccessResponse<Object>getAllSubTasks(){
         return subTaskService.getAllSubTasks();
+    }
+    @PostMapping("/updateSubTask")
+    public SuccessResponse<Object> updateSubTask(@RequestBody SubTaskDto subTaskDto){
+        return subTaskService.updateSubTask(subTaskDto);
+    }
+    @GetMapping("/getSubTaskById")
+    public SuccessResponse<Object> getSubTaskById(@RequestParam String id){
+        return subTaskService.getSubTaskById(id);
     }
 }

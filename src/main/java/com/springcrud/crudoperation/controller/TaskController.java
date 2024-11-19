@@ -16,6 +16,10 @@ public class TaskController {
     public SuccessResponse<Object> createTask(@RequestBody TaskDto taskDto){
         return taskService.createTask(taskDto);
     }
+    @PostMapping("/updateTask")
+    public SuccessResponse<Object> updateTask(@RequestBody TaskDto taskDto){
+        return taskService.updateTask(taskDto);
+    }
     @GetMapping("/getAllTasks")
     public SuccessResponse<Object> getAllTasks(){
         return taskService.getAllTasks();
