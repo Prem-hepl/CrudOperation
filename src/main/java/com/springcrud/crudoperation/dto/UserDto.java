@@ -10,7 +10,6 @@ public class UserDto {
     private String name;
     private String email;
     private String password;
-    private String ogPassword;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     private boolean isActive;

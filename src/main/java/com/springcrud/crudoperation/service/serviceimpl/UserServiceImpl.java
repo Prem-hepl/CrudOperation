@@ -37,7 +37,7 @@ public class UserServiceImpl implements UserService {
             user.setName(userDto.getName());
             user.setEmail(userDto.getEmail());
             user.setPassword(passwordEncoder.encode(userDto.getPassword()));
-            user.setOgPassword(userDto.getOgPassword());
+            user.setOgPassword(userDto.getPassword());
             user.setCreatedAt(LocalDateTime.now());
             user.setUpdatedAt(LocalDateTime.now());
             user.setActive(userDto.isActive());
@@ -64,7 +64,7 @@ public class UserServiceImpl implements UserService {
             user.setName(userDto.getName());
             user.setEmail(userDto.getEmail());
             user.setPassword(passwordEncoder.encode(userDto.getPassword()));
-            user.setOgPassword(userDto.getOgPassword());
+            user.setOgPassword(userDto.getPassword());
             user.setCreatedAt(LocalDateTime.now());
             user.setUpdatedAt(LocalDateTime.now());
             user.setActive(userDto.isActive());
