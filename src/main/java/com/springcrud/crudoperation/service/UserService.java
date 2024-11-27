@@ -15,5 +15,5 @@ public interface UserService {
 
     SuccessResponse<Object> getUserById(String id);
 
-    SuccessResponse<Object> getAllUsers();
+    SuccessResponse<List<UserResponseDto>> getAllUsers();
 }

@@ -14,8 +14,8 @@ import com.springcrud.crudoperation.service.ProjectService;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +41,12 @@ public class ProjectServiceImpl implements ProjectService {
                 if (optional.isPresent()) {
                     throw new RuntimeException("Project Name Already exist");
                 }
-                Project project = modelMapper.map(projectDto, Project.class);
+                Project project = optional.get();
+                project.setId(projectDto.getId());
+                project.setName(projectDto.getName());
+                project.setDescription(projectDto.getDescription());
+                project.setCreatedAt(projectDto.getCreatedAt());
+                project.setUpdatedAt(projectDto.getUpdatedAt());
                 User user = userRepository.findById(projectDto.getCreatedBy()).orElseThrow();
                 project.setCreatedBy(modelMapper.map(user, UserResponseDto.class));
                 project.setUpdatedBy(modelMapper.map(user, UserResponseDto.class));

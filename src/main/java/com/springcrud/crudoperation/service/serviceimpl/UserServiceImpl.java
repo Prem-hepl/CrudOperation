@@ -111,8 +111,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public SuccessResponse<Object> getAllUsers() {
-        SuccessResponse<Object> response = new SuccessResponse<>();
+    public SuccessResponse<List<UserResponseDto>> getAllUsers() {
+        SuccessResponse<List<UserResponseDto>> response = new SuccessResponse<>();
         List<UserResponseDto> userResponseDtos = new ArrayList<>();
         try {
             List<User> savedUser = userRepository.findAll();

@@ -1,6 +1,7 @@
 package com.springcrud.crudoperation.repository;
 
 import com.springcrud.crudoperation.model.Task;
+import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.repository.Aggregation;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
@@ -20,4 +21,7 @@ public interface TaskRepository extends MongoRepository<Task,String> {
     })
     List<Task> findByProjectId(String projectId);
 
+
+
+    List<Task> findByMilestone(ObjectId id);
 }

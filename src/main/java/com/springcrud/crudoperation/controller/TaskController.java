@@ -1,6 +1,7 @@
 package com.springcrud.crudoperation.controller;
 
 import com.springcrud.crudoperation.dto.TaskDto;
+import com.springcrud.crudoperation.dto.TaskResponse;
 import com.springcrud.crudoperation.response.SuccessResponse;
 import com.springcrud.crudoperation.service.TaskService;
 import lombok.Getter;
@@ -23,6 +24,10 @@ public class TaskController {
     @GetMapping("/getAllTasks")
     public SuccessResponse<Object> getAllTasks(){
         return taskService.getAllTasks();
+    }
+    @GetMapping("/getTaskById")
+    public SuccessResponse<Object> getTaskById(@RequestParam String id){
+        return taskService.getTaskById(id);
     }
     @GetMapping("/getAllByProjectId")
     public SuccessResponse<Object> getAllByProjectId(@RequestParam String projectId){
