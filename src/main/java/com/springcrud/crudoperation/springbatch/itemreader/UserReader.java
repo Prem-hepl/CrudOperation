@@ -1,4 +1,4 @@
-package com.springcrud.crudoperation.itemreader;
+package com.springcrud.crudoperation.springbatch.itemreader;
 
 import com.springcrud.crudoperation.model.User;
 import org.springframework.batch.item.ItemReader;

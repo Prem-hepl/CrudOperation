@@ -41,7 +41,7 @@ public class ProjectServiceImpl implements ProjectService {
                 if (optional.isPresent()) {
                     throw new RuntimeException("Project Name Already exist");
                 }
-                Project project = optional.get();
+                Project project = new Project();
                 project.setId(projectDto.getId());
                 project.setName(projectDto.getName());
                 project.setDescription(projectDto.getDescription());
@@ -50,6 +50,8 @@ public class ProjectServiceImpl implements ProjectService {
                 User user = userRepository.findById(projectDto.getCreatedBy()).orElseThrow();
                 project.setCreatedBy(modelMapper.map(user, UserResponseDto.class));
                 project.setUpdatedBy(modelMapper.map(user, UserResponseDto.class));
+                project.setActive(projectDto.isActive());
+                project.setDeleteFlag(!projectDto.isActive());
                 projectRepository.save(project);
             }
         } catch (Exception e) {

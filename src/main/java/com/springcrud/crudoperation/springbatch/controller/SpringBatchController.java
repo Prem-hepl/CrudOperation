@@ -1,10 +1,9 @@
-package com.springcrud.crudoperation.controller;
+package com.springcrud.crudoperation.springbatch.controller;
 
-import com.springcrud.crudoperation.configure.SpringBatchConfig;
-import com.springcrud.crudoperation.itemwriter.UserWriter;
+import com.springcrud.crudoperation.springbatch.config.SpringBatchConfig;
+import com.springcrud.crudoperation.springbatch.itemwriter.UserWriter;
 import com.springcrud.crudoperation.model.User;
 import com.springcrud.crudoperation.repository.UserRepository;
-import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.JobExecutionException;
 import org.springframework.batch.core.launch.JobLauncher;

@@ -1,4 +1,4 @@
-package com.springcrud.crudoperation.itemprocessor;
+package com.springcrud.crudoperation.springbatch.itemprocessor;
 
 
 import com.springcrud.crudoperation.model.User;

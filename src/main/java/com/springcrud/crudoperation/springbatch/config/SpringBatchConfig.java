@@ -1,8 +1,8 @@
-package com.springcrud.crudoperation.configure;
+package com.springcrud.crudoperation.springbatch.config;
 
-import com.springcrud.crudoperation.itemprocessor.UserProcessor;
-import com.springcrud.crudoperation.itemreader.UserReader;
-import com.springcrud.crudoperation.itemwriter.UserWriter;
+import com.springcrud.crudoperation.springbatch.itemprocessor.UserProcessor;
+import com.springcrud.crudoperation.springbatch.itemreader.UserReader;
+import com.springcrud.crudoperation.springbatch.itemwriter.UserWriter;
 import com.springcrud.crudoperation.model.User;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
