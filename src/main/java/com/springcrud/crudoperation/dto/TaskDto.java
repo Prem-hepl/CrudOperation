@@ -4,6 +4,7 @@ import com.springcrud.crudoperation.response.UserResponseDto;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 public class TaskDto {
@@ -17,4 +18,5 @@ public class TaskDto {
     private boolean isActive;
     private boolean deleteFlag;
     private String milestoneId;
+    private List<String> subTask;
 }

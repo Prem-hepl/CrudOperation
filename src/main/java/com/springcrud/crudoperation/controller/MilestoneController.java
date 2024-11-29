@@ -25,6 +25,10 @@ public class MilestoneController {
     public SuccessResponse<Object>getMilestoneById(@RequestParam String id){
         return milestoneService.getMilestoneById(id);
     }
+    @GetMapping("/getAllMilestoneByProject")
+    public SuccessResponse<Object> getAllMilestoneByProject(@RequestParam String projectId){
+        return milestoneService.getAllMilestoneByProjectId(projectId);
+    }
     @GetMapping("/getAllMilestone")
     public SuccessResponse<Object> getAllMilestone() {
         return milestoneService.getAllMilestone();

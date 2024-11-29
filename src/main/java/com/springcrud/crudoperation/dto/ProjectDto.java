@@ -5,6 +5,7 @@ import com.springcrud.crudoperation.response.UserResponseDto;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 public class ProjectDto {
@@ -17,5 +18,6 @@ public class ProjectDto {
     private String updatedBy;
     private boolean isActive;
     private boolean deleteFlag;
+    private List<String> milestone;
 
 }

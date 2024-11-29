@@ -3,9 +3,12 @@ package com.springcrud.crudoperation.controller;
 
 import com.springcrud.crudoperation.dto.UserDto;
 import com.springcrud.crudoperation.response.SuccessResponse;
+import com.springcrud.crudoperation.response.UserResponseDto;
 import com.springcrud.crudoperation.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
 @RestController
@@ -13,7 +16,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @PostMapping("/addUser")
+    @PostMapping("/createUser")
     public SuccessResponse<Object> addUser(@RequestBody UserDto userDto) throws Exception {
         return  userService.createUser(userDto);
     }
@@ -26,7 +29,7 @@ public class UserController {
         return userService.getUserById(id);
     }
     @GetMapping("/getAllUsers")
-    public SuccessResponse<Object> getAllUsers(){
+    public SuccessResponse<List<UserResponseDto>> getAllUsers(){
         return userService.getAllUsers();
     }
 }

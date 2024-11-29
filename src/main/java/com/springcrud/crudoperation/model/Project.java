@@ -22,7 +22,9 @@ public class Project {
     private UserResponseDto updatedBy;
     private boolean isActive;
     private boolean deleteFlag;
-    @DocumentReference
+    private String imageName;
+    private byte[] imageData;
+    @DocumentReference(lazy = true)
     private List<Milestone> milestone;
 
 }

@@ -9,15 +9,13 @@ import com.springcrud.crudoperation.model.User;
 import com.springcrud.crudoperation.repository.MilestoneRepository;
 import com.springcrud.crudoperation.repository.ProjectRepository;
 import com.springcrud.crudoperation.repository.UserRepository;
-import com.springcrud.crudoperation.response.MilestoneResponse;
+import com.springcrud.crudoperation.dto.MilestoneResponse;
 import com.springcrud.crudoperation.response.SuccessResponse;
 import com.springcrud.crudoperation.response.UserResponseDto;
 import com.springcrud.crudoperation.service.MilestoneService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.time.LocalDateTime;
 import java.util.*;
 
 @Service
@@ -85,10 +83,11 @@ public class MilestoneServiceImpl implements MilestoneService {
                     (()->new RuntimeException("User not Found"));
             milestone.setName(milestoneDto.getName());
             milestone.setDescription(milestoneDto.getDescription());
+            milestone.setCreatedBy(milestone.getCreatedBy());
             milestone.setUpdatedAt(milestoneDto.getUpdatedAt());
-            milestone.setCreatedBy(modelMapper.map(user, UserResponseDto.class));
             milestone.setUpdatedBy(modelMapper.map(user, UserResponseDto.class));
             milestone.setTasks(milestone.getTasks());
+            milestone.setProject(milestone.getProject());
             milestoneRepository.save(milestone);
         }catch (Exception e){
             throw new RuntimeException(e);
@@ -132,6 +131,14 @@ public class MilestoneServiceImpl implements MilestoneService {
     }
 
     @Override
+    public SuccessResponse<Object> getAllMilestoneByProjectId(String projectId) {
+        SuccessResponse<Object> response=new SuccessResponse<>();
+        List<MilestoneResponse>milestoneResponseList=milestoneRepository.findAllMilestoneByProjectId(projectId);
+        response.setData(milestoneResponseList);
+        return response;
+    }
+
+    @Override
     public SuccessResponse<Object> getAllMilestone() {
         SuccessResponse<Object>response=new SuccessResponse<>();
         List<MilestoneResponse>milestoneDtoList=new ArrayList<>();
@@ -151,6 +158,10 @@ public class MilestoneServiceImpl implements MilestoneService {
                         milestoneDto.setActive(milestone.isActive());
                         milestoneDto.setDeleteFlag(!milestone.isActive());
                         milestoneDto.setProjectId(milestone.getProject().getId());
+
+                        List<String> taskList=milestone.getTasks().stream()
+                                .map(Task::getId).toList();
+                        milestoneDto.setTask(taskList);
                         return milestoneDto;
                     }).toList();
         } catch (Exception e) {

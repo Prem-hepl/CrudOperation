@@ -22,8 +22,8 @@ public class Task {
     private UserResponseDto updatedBy;
     private boolean isActive;
     private boolean deleteFlag;
-    @DocumentReference
+    @DocumentReference(lazy = true)
     private Milestone milestone;
-    @DocumentReference
+    @DocumentReference(lazy = true)
     private List<SubTask>subTasks;
 }

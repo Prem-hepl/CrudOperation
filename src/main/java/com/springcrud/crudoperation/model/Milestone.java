@@ -5,6 +5,7 @@ import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.DocumentReference;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -22,8 +23,8 @@ public class Milestone {
     private UserResponseDto updatedBy;
     private boolean isActive;
     private boolean deleteFlag;
-    @DocumentReference
+    @DocumentReference(lazy = true)
     private Project project;
-    @DocumentReference
+    @DocumentReference(lazy = true)
     private List<Task>tasks;
 }

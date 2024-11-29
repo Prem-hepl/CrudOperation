@@ -7,15 +7,15 @@ import com.springcrud.crudoperation.model.User;
 import com.springcrud.crudoperation.repository.SubTaskRepository;
 import com.springcrud.crudoperation.repository.TaskRepository;
 import com.springcrud.crudoperation.repository.UserRepository;
-import com.springcrud.crudoperation.response.SubTaskResponse;
+import com.springcrud.crudoperation.dto.SubTaskResponse;
 import com.springcrud.crudoperation.response.SuccessResponse;
-import com.springcrud.crudoperation.response.TaskResponse;
 import com.springcrud.crudoperation.response.UserResponseDto;
 import com.springcrud.crudoperation.service.SubTaskService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -94,6 +94,59 @@ public class SubTaskServiceImpl implements SubTaskService {
             throw new RuntimeException(e);
         }
         response.setData(subTaskResponseList);
+        return response;
+    }
+
+    @Override
+    public SuccessResponse<Object> updateSubTask(SubTaskDto subTaskDto) {
+        SuccessResponse<Object>response=new SuccessResponse<>();
+        SubTask subTask=new SubTask();
+
+        try {
+            if (Objects.nonNull(subTaskDto)){
+                subTask=subTaskRepository.findById(subTaskDto.getId()).orElseThrow
+                        (()-> new RuntimeException("SubTask Not found"));
+            }
+            User user=userRepository.findById(subTaskDto.getId()).orElseThrow
+                    (()-> new RuntimeException("User not found"));
+            subTask.setName(subTaskDto.getName());
+            subTask.setDescription(subTaskDto.getDescription());
+            subTask.setUpdatedAt(LocalDateTime.now());
+            subTask.setCreatedBy(modelMapper.map(user, UserResponseDto.class));
+            subTask.setUpdatedBy(modelMapper.map(user, UserResponseDto.class));
+            subTask.setActive(subTask.isActive());
+            subTask.setDeleteFlag(!subTaskDto.isActive());
+            subTaskRepository.save(subTask);
+        } catch (RuntimeException e) {
+            throw new RuntimeException(e);
+        }
+        response.setStatusCode(200);
+        response.setStatusMesssage("SubTask Updated Successfully");
+        return response;
+    }
+
+    @Override
+    public SuccessResponse<Object> getSubTaskById(String id) {
+        SuccessResponse<Object> response=new SuccessResponse<>();
+
+        if (Objects.nonNull(id)){
+            Optional<SubTask> savedSubTask=subTaskRepository.findById(id);
+            if (savedSubTask.isPresent()){
+                SubTask subTask=savedSubTask.get();
+                SubTaskResponse subTaskResponse=new SubTaskResponse();
+                subTaskResponse.setId(subTask.getId());
+                subTaskResponse.setName(subTask.getName());
+                subTaskResponse.setDescription(subTask.getDescription());
+                subTaskResponse.setCreatedAt(String.valueOf(LocalDateTime.now()));
+                subTaskResponse.setUpdatedAt(String.valueOf(LocalDateTime.now()));
+                subTaskResponse.setCreatedBy(subTask.getCreatedBy());
+                subTaskResponse.setUpdatedBy(subTask.getUpdatedBy());
+                subTaskResponse.setActive(subTask.isActive());
+                subTaskResponse.setDeleteFlag(!subTask.isActive());
+                subTaskResponse.setTaskId(subTaskResponse.getTaskId());
+                response.setData(subTaskResponse);
+            }
+        }
         return response;
     }
 }

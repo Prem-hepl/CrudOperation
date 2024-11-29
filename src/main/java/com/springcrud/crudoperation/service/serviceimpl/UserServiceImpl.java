@@ -6,19 +6,15 @@ import com.springcrud.crudoperation.repository.UserRepository;
 import com.springcrud.crudoperation.response.SuccessResponse;
 import com.springcrud.crudoperation.response.UserResponseDto;
 import com.springcrud.crudoperation.service.UserService;
-
-import org.apache.poi.sl.draw.geom.GuideIf;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import springfox.documentation.swagger2.mappers.ModelMapper;
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.stream.Collectors;
+
 
 
 @Service
@@ -41,7 +37,7 @@ public class UserServiceImpl implements UserService {
             user.setName(userDto.getName());
             user.setEmail(userDto.getEmail());
             user.setPassword(passwordEncoder.encode(userDto.getPassword()));
-            user.setOgPassword(userDto.getOgPassword());
+            user.setOgPassword(userDto.getPassword());
             user.setCreatedAt(LocalDateTime.now());
             user.setUpdatedAt(LocalDateTime.now());
             user.setActive(userDto.isActive());
@@ -68,7 +64,7 @@ public class UserServiceImpl implements UserService {
             user.setName(userDto.getName());
             user.setEmail(userDto.getEmail());
             user.setPassword(passwordEncoder.encode(userDto.getPassword()));
-            user.setOgPassword(userDto.getOgPassword());
+            user.setOgPassword(userDto.getPassword());
             user.setCreatedAt(LocalDateTime.now());
             user.setUpdatedAt(LocalDateTime.now());
             user.setActive(userDto.isActive());
@@ -115,8 +111,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public SuccessResponse<Object> getAllUsers() {
-        SuccessResponse<Object> response = new SuccessResponse<>();
+    public SuccessResponse<List<UserResponseDto>> getAllUsers() {
+        SuccessResponse<List<UserResponseDto>> response = new SuccessResponse<>();
         List<UserResponseDto> userResponseDtos = new ArrayList<>();
         try {
             List<User> savedUser = userRepository.findAll();
