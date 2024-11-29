@@ -131,6 +131,14 @@ public class MilestoneServiceImpl implements MilestoneService {
     }
 
     @Override
+    public SuccessResponse<Object> getAllMilestoneByProjectId(String projectId) {
+        SuccessResponse<Object> response=new SuccessResponse<>();
+        List<MilestoneResponse>milestoneResponseList=milestoneRepository.findAllMilestoneByProjectId(projectId);
+        response.setData(milestoneResponseList);
+        return response;
+    }
+
+    @Override
     public SuccessResponse<Object> getAllMilestone() {
         SuccessResponse<Object>response=new SuccessResponse<>();
         List<MilestoneResponse>milestoneDtoList=new ArrayList<>();

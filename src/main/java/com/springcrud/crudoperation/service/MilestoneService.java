@@ -11,4 +11,6 @@ public interface MilestoneService {
     SuccessResponse<Object> updateMilestone(MilestoneDto milestoneDto);
 
     SuccessResponse<Object> getMilestoneById(String id);
+
+    SuccessResponse<Object> getAllMilestoneByProjectId(String projectId);
 }
