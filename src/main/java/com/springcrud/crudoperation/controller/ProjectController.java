@@ -28,4 +28,8 @@ public class ProjectController {
     public SuccessResponse<Object> getAllProjects(){
         return projectService.getAllProjects();
     }
+    @GetMapping("/getProjectByTaskId")
+    public SuccessResponse<Object> getProjectByTaskId(@RequestParam String projectId,@RequestParam String taskId){
+        return projectService.getProjectByTaskId(projectId,taskId);
+    }
 }

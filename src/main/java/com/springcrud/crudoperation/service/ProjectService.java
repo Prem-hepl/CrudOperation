@@ -13,4 +13,6 @@ public interface ProjectService {
     SuccessResponse<Object> updateProject(ProjectDto projectDto);
 
     SuccessResponse<Object> getProjectById(String id);
+
+    SuccessResponse<Object> getProjectByTaskId(String projectId, String taskId);
 }

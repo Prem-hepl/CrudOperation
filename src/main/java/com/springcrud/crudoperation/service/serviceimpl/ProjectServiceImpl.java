@@ -2,9 +2,8 @@ package com.springcrud.crudoperation.service.serviceimpl;
 
 
 import com.springcrud.crudoperation.dto.ProjectDto;
-import com.springcrud.crudoperation.model.Milestone;
-import com.springcrud.crudoperation.model.Project;
-import com.springcrud.crudoperation.model.User;
+import com.springcrud.crudoperation.dto.TaskResponse;
+import com.springcrud.crudoperation.model.*;
 import com.springcrud.crudoperation.repository.ProjectRepository;
 import com.springcrud.crudoperation.repository.UserRepository;
 import com.springcrud.crudoperation.dto.ProjectResponse;
@@ -119,6 +118,20 @@ public class ProjectServiceImpl implements ProjectService {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+        return response;
+    }
+
+    @Override
+    public SuccessResponse<Object> getProjectByTaskId(String projectId, String taskId) {
+        SuccessResponse<Object> response=new SuccessResponse<>();
+        List<ProjectResponse>taskResponseList=new ArrayList<>();
+        List<Object> projects=projectRepository.findByProjectAndTaskId(projectId,taskId);
+/*        taskResponseList=projects.stream()
+                        .map(project -> {
+
+                        })*/
+
+        response.setData(projects);
         return response;
     }
 

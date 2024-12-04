@@ -22,8 +22,6 @@ public class Project {
     private UserResponseDto updatedBy;
     private boolean isActive;
     private boolean deleteFlag;
-    private String imageName;
-    private byte[] imageData;
     @DocumentReference(lazy = true)
     private List<Milestone> milestone;
 
