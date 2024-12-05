@@ -55,7 +55,7 @@ public class ProjectTemplateServiceImpl implements ProjectTemplateService {
             throw new RuntimeException("Project not found");
         }
 
-        Project project=savedProject.get();
+        Project project=new Project();
 
         ProjectTemplate projectTemplate=mapProjectToTemplate(project);
 
