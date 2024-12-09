@@ -12,6 +12,7 @@ import com.springcrud.crudoperation.response.UserResponseDto;
 import com.springcrud.crudoperation.service.ProjectService;
 
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -41,6 +42,7 @@ public class ProjectServiceImpl implements ProjectService {
                     throw new RuntimeException("Project Name Already exist");
                 }
                 Project project = new Project();
+//                BeanUtils.copyProperties(projectDto,project);
                 project.setId(projectDto.getId());
                 project.setName(projectDto.getName());
                 project.setDescription(projectDto.getDescription());
