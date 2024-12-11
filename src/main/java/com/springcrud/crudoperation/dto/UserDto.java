@@ -12,6 +12,7 @@ public class UserDto {
     private String password;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+    private String applicationRole;
     private boolean isActive;
     private boolean deleteFlag;
 }

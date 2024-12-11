@@ -1,7 +1,9 @@
 package com.springcrud.crudoperation.service.serviceimpl;
 
 import com.springcrud.crudoperation.dto.UserDto;
+import com.springcrud.crudoperation.model.MasterRole;
 import com.springcrud.crudoperation.model.User;
+import com.springcrud.crudoperation.repository.MasterRoleRepository;
 import com.springcrud.crudoperation.repository.UserRepository;
 import com.springcrud.crudoperation.response.SuccessResponse;
 import com.springcrud.crudoperation.response.UserResponseDto;
@@ -21,7 +23,8 @@ import java.util.Optional;
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
-
+    @Autowired
+    private MasterRoleRepository masterRoleRepository;
     @Override
     public SuccessResponse<Object> createUser(UserDto userDto) throws Exception {
         SuccessResponse<Object> response = new SuccessResponse<>();
@@ -32,6 +35,7 @@ public class UserServiceImpl implements UserService {
                     throw new RuntimeException("User email already Exist");
                 }
             }
+            MasterRole masterRole=masterRoleRepository.findById(userDto.getApplicationRole()).orElseThrow();
             User user = new User();
             BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
             user.setName(userDto.getName());
@@ -40,6 +44,7 @@ public class UserServiceImpl implements UserService {
             user.setOgPassword(userDto.getPassword());
             user.setCreatedAt(LocalDateTime.now());
             user.setUpdatedAt(LocalDateTime.now());
+            user.setApplicationRole(masterRole);
             user.setActive(userDto.isActive());
             user.setDeleteFlag(!userDto.isActive());
             userRepository.save(user);
@@ -60,6 +65,7 @@ public class UserServiceImpl implements UserService {
                 user = userRepository.findById(userDto.getId()).orElseThrow
                         (() -> new RuntimeException("User not Found"));
             }
+            MasterRole masterRole=masterRoleRepository.findById(userDto.getApplicationRole()).orElseThrow();
             BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
             user.setName(userDto.getName());
             user.setEmail(userDto.getEmail());
@@ -67,6 +73,7 @@ public class UserServiceImpl implements UserService {
             user.setOgPassword(userDto.getPassword());
             user.setCreatedAt(LocalDateTime.now());
             user.setUpdatedAt(LocalDateTime.now());
+            user.setApplicationRole(masterRole);
             user.setActive(userDto.isActive());
             user.setDeleteFlag(!userDto.isActive());
             userRepository.save(user);
@@ -95,7 +102,7 @@ public class UserServiceImpl implements UserService {
                     userDto.setUpdatedAt(String.valueOf(LocalDateTime.now()));
                     userDto.setActive(users.isActive());
                     userDto.setDeleteFlag(!users.isActive());
-
+                    userDto.setApplicationRole(users.getApplicationRole().getId());
                     response.setStatusCode(200);
                     response.setStatusMesssage("Success");
                     response.setData(userDto);

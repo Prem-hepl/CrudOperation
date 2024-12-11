@@ -9,6 +9,7 @@ public class UserResponseDto {
     private String email;
     private String createdAt;
     private String updatedAt;
+    private String applicationRole;
     private boolean isActive;
     private boolean deleteFlag;
 }
