@@ -1,5 +1,6 @@
 package com.springcrud.crudoperation.service;
 
+import com.springcrud.crudoperation.dto.UpdatePasswordDto;
 import com.springcrud.crudoperation.dto.UserDto;
 import com.springcrud.crudoperation.response.SuccessResponse;
 import com.springcrud.crudoperation.response.UserResponseDto;
@@ -16,4 +17,6 @@ public interface UserService {
     SuccessResponse<Object> getUserById(String id);
 
     SuccessResponse<List<UserResponseDto>> getAllUsers();
+
+    SuccessResponse<Object> updatePassword(UpdatePasswordDto updatePasswordDto);
 }

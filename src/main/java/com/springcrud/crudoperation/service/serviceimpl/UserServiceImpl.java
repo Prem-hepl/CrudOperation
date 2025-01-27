@@ -1,5 +1,6 @@
 package com.springcrud.crudoperation.service.serviceimpl;
 
+import com.springcrud.crudoperation.dto.UpdatePasswordDto;
 import com.springcrud.crudoperation.dto.UserDto;
 import com.springcrud.crudoperation.model.MasterRole;
 import com.springcrud.crudoperation.model.User;
@@ -35,7 +36,8 @@ public class UserServiceImpl implements UserService {
                     throw new RuntimeException("User email already Exist");
                 }
             }
-            MasterRole masterRole=masterRoleRepository.findById(userDto.getApplicationRole()).orElseThrow();
+            MasterRole masterRole=masterRoleRepository.findById(userDto.getApplicationRole()).orElseThrow
+                    (() -> new RuntimeException("Role not found"));
             User user = new User();
             BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
             user.setName(userDto.getName());
@@ -49,7 +51,7 @@ public class UserServiceImpl implements UserService {
             user.setDeleteFlag(!userDto.isActive());
             userRepository.save(user);
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("No Data Found");
         }
         response.setStatusCode(200);
         response.setStatusMesssage("User Created Successfully....");
@@ -139,6 +141,31 @@ public class UserServiceImpl implements UserService {
             response.setData(userResponseDtos);
 
         } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        return response;
+    }
+    @Override
+    public SuccessResponse<Object> updatePassword(UpdatePasswordDto updatePasswordDto) {
+        SuccessResponse<Object> response = new SuccessResponse<>();
+        User user=new User();
+        try {
+            Optional<User>savedUser= Optional.ofNullable(userRepository.findByEmail(updatePasswordDto.getEmail()).
+                    orElseThrow(() -> new RuntimeException("Email not found")));
+            if (savedUser.isPresent()) {
+                BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+                user=savedUser.get();
+                if(encoder.matches(updatePasswordDto.getOldPassword(),user.getPassword())){
+                    user.setPassword(encoder.encode(updatePasswordDto.getNewPassword()));
+                    user.setOgPassword(updatePasswordDto.getNewPassword());
+                    userRepository.save(user);
+                    response.setStatusCode(200);
+                    response.setStatusMesssage("Password Updated Successfully....");
+                }else{
+                    throw new RuntimeException("Incorrect Old Password");
+                }
+            }
+        }catch (Exception e){
             throw new RuntimeException(e);
         }
         return response;

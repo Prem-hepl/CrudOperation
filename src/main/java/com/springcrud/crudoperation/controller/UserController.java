@@ -1,11 +1,13 @@
 package com.springcrud.crudoperation.controller;
 
 
+import com.springcrud.crudoperation.dto.UpdatePasswordDto;
 import com.springcrud.crudoperation.dto.UserDto;
 import com.springcrud.crudoperation.response.SuccessResponse;
 import com.springcrud.crudoperation.response.UserResponseDto;
 import com.springcrud.crudoperation.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -31,5 +33,9 @@ public class UserController {
     @GetMapping("/getAllUsers")
     public SuccessResponse<List<UserResponseDto>> getAllUsers(){
         return userService.getAllUsers();
+    }
+    @PostMapping("/updatePassword")
+    public SuccessResponse<Object> updatePassword(@RequestBody UpdatePasswordDto updatePasswordDto){
+        return userService.updatePassword(updatePasswordDto);
     }
 }
